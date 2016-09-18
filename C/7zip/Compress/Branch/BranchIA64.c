@@ -2,12 +2,12 @@
 
 #include "BranchIA64.h"
 
-const Byte kBranchTable[32] = 
-{ 
+const Byte kBranchTable[32] =
+{
   0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0,
   4, 4, 6, 6, 0, 0, 7, 7,
-  4, 4, 0, 0, 4, 4, 0, 0 
+  4, 4, 0, 0, 4, 4, 0, 0
 };
 
 UInt32 IA64_Convert(Byte *data, UInt32 size, UInt32 nowPos, int encoding)
@@ -30,28 +30,28 @@ UInt32 IA64_Convert(Byte *data, UInt32 size, UInt32 nowPos, int encoding)
         instruction += (UInt64)(data[i + j + bytePos]) << (8 * j);
 
       UInt64 instNorm = instruction >> bitRes;
-      if (((instNorm >> 37) & 0xF) == 0x5 
-        &&  ((instNorm >> 9) & 0x7) == 0 
+      if (((instNorm >> 37) & 0xF) == 0x5
+        &&  ((instNorm >> 9) & 0x7) == 0
         /* &&  (instNorm & 0x3F)== 0 */
         )
       {
         UInt32 src = UInt32((instNorm >> 13) & 0xFFFFF);
         src |= ((instNorm >> 36) & 1) << 20;
-        
+
         src <<= 4;
-        
+
         UInt32 dest;
         if (encoding)
           dest = nowPos + i + src;
         else
           dest = src - (nowPos + i);
-        
+
         dest >>= 4;
-        
+
         instNorm &= ~(UInt64(0x8FFFFF) << 13);
         instNorm |= (UInt64(dest & 0xFFFFF) << 13);
         instNorm |= (UInt64(dest & 0x100000) << (36 - 20));
-        
+
         instruction &= (1 << bitRes) - 1;
         instruction |= (instNorm << bitRes);
         for (j = 0; j < 6; j++)

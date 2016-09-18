@@ -8,9 +8,9 @@ UInt32 PPC_B_Convert(Byte *data, UInt32 size, UInt32 nowPos, int encoding)
   for (i = 0; i + 4 <= size; i += 4)
   {
     /* PowerPC branch 6(48) 24(Offset) 1(Abs) 1(Link) */
-    if ((data[i] >> 2) == 0x12 && 
+    if ((data[i] >> 2) == 0x12 &&
     (
-      (data[i + 3] & 3) == 1 
+      (data[i + 3] & 3) == 1
       /* || (data[i+3] & 3) == 3 */
       )
     )
@@ -19,7 +19,7 @@ UInt32 PPC_B_Convert(Byte *data, UInt32 size, UInt32 nowPos, int encoding)
         (data[i + 1] << 16) |
         (data[i + 2] << 8) |
         (data[i + 3] & (~3));
-      
+
       UInt32 dest;
       if (encoding)
         dest = nowPos + i + src;

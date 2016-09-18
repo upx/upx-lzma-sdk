@@ -21,7 +21,7 @@ void x86_Convert_Init(UInt32 *prevMask, UInt32 *prevPos)
 }
 */
 
-UInt32 x86_Convert(Byte *buffer, UInt32 endPos, UInt32 nowPos, 
+UInt32 x86_Convert(Byte *buffer, UInt32 endPos, UInt32 nowPos,
     UInt32 *prevMask, UInt32 *prevPos, int encoding)
 {
   UInt32 bufferPos = 0;
@@ -29,10 +29,10 @@ UInt32 x86_Convert(Byte *buffer, UInt32 endPos, UInt32 nowPos,
 
   if (endPos < 5)
     return 0;
-  
+
   if (nowPos - *prevPos > 5)
     *prevPos = nowPos - 5;
-  
+
   limit = endPos - 5;
   while(bufferPos <= limit)
   {
@@ -57,15 +57,15 @@ UInt32 x86_Convert(Byte *buffer, UInt32 endPos, UInt32 nowPos,
       }
     }
     b = buffer[bufferPos + 4];
-    if (Test86MSByte(b) && kMaskToAllowedStatus[(*prevMask >> 1) & 0x7] && 
+    if (Test86MSByte(b) && kMaskToAllowedStatus[(*prevMask >> 1) & 0x7] &&
       (*prevMask >> 1) < 0x10)
     {
-      UInt32 src = 
+      UInt32 src =
         ((UInt32)(b) << 24) |
         ((UInt32)(buffer[bufferPos + 3]) << 16) |
         ((UInt32)(buffer[bufferPos + 2]) << 8) |
         (buffer[bufferPos + 1]);
-      
+
       UInt32 dest;
       while(1)
       {

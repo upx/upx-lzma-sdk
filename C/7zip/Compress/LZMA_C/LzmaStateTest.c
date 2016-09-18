@@ -1,4 +1,4 @@
-/* 
+/*
 LzmaStateTest.c
 Test application for LZMA Decoder (State version)
 
@@ -41,10 +41,10 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
      You can remove outSizeHigh, if you don't need >= 4GB supporting,
      or you can use UInt64 outSize, if your compiler supports 64-bit integers*/
   UInt32 outSize = 0;
-  UInt32 outSizeHigh = 0; 
-  
-  int waitEOS = 1; 
-  /* waitEOS = 1, if there is no uncompressed size in headers, 
+  UInt32 outSizeHigh = 0;
+
+  int waitEOS = 1;
+  /* waitEOS = 1, if there is no uncompressed size in headers,
    so decoder will wait EOS (End of Stream Marker) in compressed stream */
 
   int i;
@@ -63,7 +63,7 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
     return PrintError(rs, kCantReadMessage);
 
   /* Read uncompressed size */
-  
+
   for (i = 0; i < 8; i++)
   {
     unsigned char b;
@@ -78,13 +78,13 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
   }
 
   /* Decode LZMA properties and allocate memory */
-  
+
   if (LzmaDecodeProperties(&state.Properties, properties, LZMA_PROPERTIES_SIZE) != LZMA_RESULT_OK)
     return PrintError(rs, "Incorrect stream properties");
   state.Probs = (CProb *)malloc(LzmaGetNumProbs(&state.Properties) * sizeof(CProb));
   if (state.Probs == 0)
     return PrintError(rs, kCantAllocateMessage);
-  
+
   if (state.Properties.DictionarySize == 0)
     state.Dictionary = 0;
   else
@@ -96,11 +96,11 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
       return PrintError(rs, kCantAllocateMessage);
     }
   }
-  
+
   /* Decompress */
-  
+
   LzmaDecoderInit(&state);
-  
+
   do
   {
     SizeT inProcessed, outProcessed;
@@ -126,15 +126,15 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
     }
     inAvail -= inProcessed;
     inBuffer += inProcessed;
-    
-    if (outFile != 0)  
+
+    if (outFile != 0)
       if (fwrite(g_OutBuffer, 1, outProcessed, outFile) != outProcessed)
       {
         PrintError(rs, kCantWriteMessage);
         res = 1;
         break;
       }
-      
+
     if (outSize < outProcessed)
       outSizeHigh--;
     outSize -= (UInt32)outProcessed;

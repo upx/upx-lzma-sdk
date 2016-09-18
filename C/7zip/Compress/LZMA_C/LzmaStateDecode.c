@@ -1,21 +1,21 @@
 /*
   LzmaStateDecode.c
   LZMA Decoder (State version)
-  
+
   LZMA SDK 4.40 Copyright (c) 1999-2006 Igor Pavlov (2006-05-01)
   http://www.7-zip.org/
 
   LZMA SDK is licensed under two licenses:
   1) GNU Lesser General Public License (GNU LGPL)
   2) Common Public License (CPL)
-  It means that you can select one of these two licenses and 
+  It means that you can select one of these two licenses and
   follow rules of that license.
 
   SPECIAL EXCEPTION:
-  Igor Pavlov, as the author of this Code, expressly permits you to 
-  statically or dynamically link your Code (or bind by name) to the 
-  interfaces of this file without subjecting your linked Code to the 
-  terms of the CPL or GNU LGPL. Any modifications or additions 
+  Igor Pavlov, as the author of this Code, expressly permits you to
+  statically or dynamically link your Code (or bind by name) to the
+  interfaces of this file without subjecting your linked Code to the
+  terms of the CPL or GNU LGPL. Any modifications or additions
   to this file, however, are subject to the LGPL or CPL terms.
 */
 
@@ -41,9 +41,9 @@
 
 #define RC_GET_BIT2(p, mi, A0, A1) IfBit0(p) \
   { UpdateBit0(p); mi <<= 1; A0; } else \
-  { UpdateBit1(p); mi = (mi + mi) + 1; A1; } 
-  
-#define RC_GET_BIT(p, mi) RC_GET_BIT2(p, mi, ; , ;)               
+  { UpdateBit1(p); mi = (mi + mi) + 1; A1; }
+
+#define RC_GET_BIT(p, mi) RC_GET_BIT2(p, mi, ; , ;)
 
 #define RangeDecoderBitTreeDecode(probs, numLevels, res) \
   { int i = numLevels; res = 1; \
@@ -66,7 +66,7 @@
 #define LenLow (LenChoice2 + 1)
 #define LenMid (LenLow + (kNumPosStatesMax << kLenNumLowBits))
 #define LenHigh (LenMid + (kNumPosStatesMax << kLenNumMidBits))
-#define kNumLenProbs (LenHigh + kLenNumHighSymbols) 
+#define kNumLenProbs (LenHigh + kLenNumHighSymbols)
 
 
 #define kNumStates 12
@@ -101,9 +101,9 @@
 StopCompilingDueBUG
 #endif
 
-/* kRequiredInBufferSize = number of required input bytes for worst case: 
+/* kRequiredInBufferSize = number of required input bytes for worst case:
    longest match with longest distance.
-   kLzmaInBufferSize must be larger than kRequiredInBufferSize 
+   kLzmaInBufferSize must be larger than kRequiredInBufferSize
    23 bits = 2 (match select) + 10 (len) + 6 (distance) + 4(align) + 1 (RC_NORMALIZE)
 */
 
@@ -201,7 +201,7 @@ int LzmaDecode(
       UInt32 numProbs = Literal + ((UInt32)LZMA_LIT_SIZE << (lc + vs->Properties.lp));
       UInt32 i;
       for (i = 0; i < numProbs; i++)
-        p[i] = kBitModelTotal >> 1; 
+        p[i] = kBitModelTotal >> 1;
       rep0 = rep1 = rep2 = rep3 = 1;
       state = 0;
       globalPos = 0;
@@ -260,7 +260,7 @@ int LzmaDecode(
     {
       int symbol = 1;
       UpdateBit0(prob)
-      prob = p + Literal + (LZMA_LIT_SIZE * 
+      prob = p + Literal + (LZMA_LIT_SIZE *
         ((((nowPos + globalPos)& literalPosMask) << lc) + (previousByte >> (8 - lc))));
 
       if (state >= kNumLitStates)
@@ -299,7 +299,7 @@ int LzmaDecode(
       else if (state < 10) state -= 3;
       else state -= 6;
     }
-    else             
+    else
     {
       UpdateBit1(prob);
       prob = p + IsRep + state;
@@ -354,7 +354,7 @@ int LzmaDecode(
             UpdateBit0(prob);
             distance = rep1;
           }
-          else 
+          else
           {
             UpdateBit1(prob);
             prob = p + IsRepG2 + state;
@@ -415,7 +415,7 @@ int LzmaDecode(
         int posSlot;
         state += kNumLitStates;
         prob = p + PosSlot +
-            ((len < kNumLenToPosStates ? len : kNumLenToPosStates - 1) << 
+            ((len < kNumLenToPosStates ? len : kNumLenToPosStates - 1) <<
             kNumPosSlotBits);
         RangeDecoderBitTreeDecode(prob, kNumPosSlotBits, posSlot);
         if (posSlot >= kStartPosModelIndex)
@@ -469,7 +469,7 @@ int LzmaDecode(
       }
 
       len += kMatchMinLen;
-      if (rep0 > distanceLimit) 
+      if (rep0 > distanceLimit)
         return LZMA_RESULT_DATA_ERROR;
       if (dictionarySize - distanceLimit > (UInt32)len)
         distanceLimit += len;

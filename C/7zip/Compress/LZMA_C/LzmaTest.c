@@ -1,4 +1,4 @@
-/* 
+/*
 LzmaTest.c
 Test application for LZMA Decoder
 
@@ -17,20 +17,20 @@ const char *kCantWriteMessage = "Can not write output file";
 const char *kCantAllocateMessage = "Can not allocate memory";
 
 size_t MyReadFile(FILE *file, void *data, size_t size)
-{ 
+{
   if (size == 0)
     return 0;
-  return fread(data, 1, size, file); 
+  return fread(data, 1, size, file);
 }
 
 int MyReadFileAndCheck(FILE *file, void *data, size_t size)
-  { return (MyReadFile(file, data, size) == size);} 
+  { return (MyReadFile(file, data, size) == size);}
 
 size_t MyWriteFile(FILE *file, const void *data, size_t size)
-{ 
+{
   if (size == 0)
     return 0;
-  return fwrite(data, 1, size, file); 
+  return fwrite(data, 1, size, file);
 }
 
 int MyWriteFileAndCheck(FILE *file, const void *data, size_t size)
@@ -79,9 +79,9 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
   SizeT outSizeFull;
   unsigned char *outStream;
   #endif
-  
-  int waitEOS = 1; 
-  /* waitEOS = 1, if there is no uncompressed size in headers, 
+
+  int waitEOS = 1;
+  /* waitEOS = 1, if there is no uncompressed size in headers,
    so decoder will wait EOS (End of Stream Marker) in compressed stream */
 
   #ifndef _LZMA_IN_CB
@@ -134,7 +134,7 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
       else
         outSizeHigh += (UInt32)(b) << ((i - 4) * 8);
     }
-    
+
     #ifndef _LZMA_OUT_READ
     if (waitEOS)
       return PrintError(rs, "Stream with EOS marker is not supported");
@@ -147,7 +147,7 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
   }
 
   /* Decode LZMA properties and allocate memory */
-  
+
   if (LzmaDecodeProperties(&state.Properties, properties, LZMA_PROPERTIES_SIZE) != LZMA_RESULT_OK)
     return PrintError(rs, "Incorrect stream properties");
   state.Probs = (CProb *)malloc(LzmaGetNumProbs(&state.Properties) * sizeof(CProb));
@@ -171,7 +171,7 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
     inStream = (unsigned char *)malloc(compressedSize);
   #endif
 
-  if (state.Probs == 0 
+  if (state.Probs == 0
     #ifdef _LZMA_OUT_READ
     || (state.Dictionary == 0 && state.Properties.DictionarySize != 0)
     #else
@@ -236,20 +236,20 @@ int main3(FILE *inFile, FILE *outFile, char *rs)
       inAvail -= inProcessed;
       inBuffer += inProcessed;
       #endif
-      
-      if (outFile != 0)  
+
+      if (outFile != 0)
         if (!MyWriteFileAndCheck(outFile, g_OutBuffer, (size_t)outProcessed))
         {
           PrintError(rs, kCantWriteMessage);
           res = 1;
           break;
         }
-        
+
       if (outSize < outProcessed)
         outSizeHigh--;
       outSize -= (UInt32)outProcessed;
       outSize &= 0xFFFFFFFF;
-        
+
       if (outProcessed == 0)
       {
         if (!waitEOS && (outSize != 0 || outSizeHigh != 0))

@@ -3,16 +3,16 @@ LZMA SDK 4.43
 
 LZMA SDK   Copyright (C) 1999-2006 Igor Pavlov
 
-LZMA SDK provides the documentation, samples, header files, libraries, 
+LZMA SDK provides the documentation, samples, header files, libraries,
 and tools you need to develop applications that use LZMA compression.
 
 LZMA is default and general compression method of 7z format
-in 7-Zip compression program (www.7-zip.org). LZMA provides high 
+in 7-Zip compression program (www.7-zip.org). LZMA provides high
 compression ratio and very fast decompression.
 
-LZMA is an improved version of famous LZ77 compression algorithm. 
+LZMA is an improved version of famous LZ77 compression algorithm.
 It was improved in way of maximum increasing of compression ratio,
-keeping high decompression speed and low memory requirements for 
+keeping high decompression speed and low memory requirements for
 decompressing.
 
 
@@ -24,52 +24,52 @@ LZMA SDK is available under any of the following licenses:
 
 1) GNU Lesser General Public License (GNU LGPL)
 2) Common Public License (CPL)
-3) Simplified license for unmodified code (read SPECIAL EXCEPTION) 
-4) Proprietary license 
+3) Simplified license for unmodified code (read SPECIAL EXCEPTION)
+4) Proprietary license
 
 It means that you can select one of these four options and follow rules of that license.
 
 
 1,2) GNU LGPL and CPL licenses are pretty similar and both these
-licenses are classified as 
- - "Free software licenses" at http://www.gnu.org/ 
+licenses are classified as
+ - "Free software licenses" at http://www.gnu.org/
  - "OSI-approved" at http://www.opensource.org/
 
 
 3) SPECIAL EXCEPTION
 
-Igor Pavlov, as the author of this code, expressly permits you 
-to statically or dynamically link your code (or bind by name) 
-to the files from LZMA SDK without subjecting your linked 
-code to the terms of the CPL or GNU LGPL. 
-Any modifications or additions to files from LZMA SDK, however, 
+Igor Pavlov, as the author of this code, expressly permits you
+to statically or dynamically link your code (or bind by name)
+to the files from LZMA SDK without subjecting your linked
+code to the terms of the CPL or GNU LGPL.
+Any modifications or additions to files from LZMA SDK, however,
 are subject to the GNU LGPL or CPL terms.
 
-SPECIAL EXCEPTION allows you to use LZMA SDK in applications with closed code, 
+SPECIAL EXCEPTION allows you to use LZMA SDK in applications with closed code,
 while you keep LZMA SDK code unmodified.
 
 
-SPECIAL EXCEPTION #2: Igor Pavlov, as the author of this code, expressly permits 
-you to use this code under the same terms and conditions contained in the License 
+SPECIAL EXCEPTION #2: Igor Pavlov, as the author of this code, expressly permits
+you to use this code under the same terms and conditions contained in the License
 Agreement you have for any previous version of LZMA SDK developed by Igor Pavlov.
 
-SPECIAL EXCEPTION #2 allows owners of proprietary licenses to use latest version 
+SPECIAL EXCEPTION #2 allows owners of proprietary licenses to use latest version
 of LZMA SDK as update for previous versions.
 
 
-SPECIAL EXCEPTION #3: Igor Pavlov, as the author of this code, expressly permits 
-you to use code of the following files: 
-BranchTypes.h, LzmaTypes.h, LzmaTest.c, LzmaStateTest.c, LzmaAlone.cpp, 
+SPECIAL EXCEPTION #3: Igor Pavlov, as the author of this code, expressly permits
+you to use code of the following files:
+BranchTypes.h, LzmaTypes.h, LzmaTest.c, LzmaStateTest.c, LzmaAlone.cpp,
 LzmaAlone.cs, LzmaAlone.java
-as public domain code. 
+as public domain code.
 
 
 4) Proprietary license
 
-LZMA SDK also can be available under a proprietary license which 
+LZMA SDK also can be available under a proprietary license which
 can include:
 
-1) Right to modify code without subjecting modified code to the 
+1) Right to modify code without subjecting modified code to the
 terms of the CPL or GNU LGPL
 2) Technical support for code
 
@@ -98,20 +98,20 @@ LZMA SDK includes:
   - Compiled file->file LZMA compressing/decompressing program for Windows system
 
 ANSI-C LZMA decompression code was ported from original C++ sources to C.
-Also it was simplified and optimized for code size. 
+Also it was simplified and optimized for code size.
 But it is fully compatible with LZMA from 7-Zip.
 
 
-UNIX/Linux version 
+UNIX/Linux version
 ------------------
 To compile C++ version of file->file LZMA, go to directory
-C/7zip/Compress/LZMA_Alone 
+C/7zip/Compress/LZMA_Alone
 and type "make" or "make clean all" to recompile all.
 
 In some UNIX/Linux versions you must compile LZMA with static libraries.
 To compile with static libraries, change string in makefile
 LIB = -lm
-to string  
+to string
 LIB = -lm -static
 
 
@@ -177,10 +177,10 @@ Java  - Java files
 
 C/C++ source code of LZMA SDK is part of 7-Zip project.
 
-You can find ANSI-C LZMA decompressing code at folder 
+You can find ANSI-C LZMA decompressing code at folder
   C/7zip/Compress/LZMA_C
-7-Zip doesn't use that ANSI-C LZMA code and that code was developed 
-specially for this SDK. And files from LZMA_C do not need files from 
+7-Zip doesn't use that ANSI-C LZMA code and that code was developed
+specially for this SDK. And files from LZMA_C do not need files from
 other directories of SDK for compiling.
 
 7-Zip source code can be downloaded from 7-Zip's SourceForge page:
@@ -192,14 +192,14 @@ LZMA features
 -------------
   - Variable dictionary size (up to 1 GB)
   - Estimated compressing speed: about 1 MB/s on 1 GHz CPU
-  - Estimated decompressing speed: 
+  - Estimated decompressing speed:
       - 8-12 MB/s on 1 GHz Intel Pentium 3 or AMD Athlon
       - 500-1000 KB/s on 100 MHz ARM, MIPS, PowerPC or other simple RISC
   - Small memory requirements for decompressing (8-32 KB + DictionarySize)
-  - Small code size for decompressing: 2-8 KB (depending from 
-    speed optimizations) 
+  - Small code size for decompressing: 2-8 KB (depending from
+    speed optimizations)
 
-LZMA decoder uses only integer operations and can be 
+LZMA decoder uses only integer operations and can be
 implemented in any modern 32-bit CPU (or on 16-bit CPU with some conditions).
 
 Some critical operations that affect to speed of LZMA decompression:
@@ -208,7 +208,7 @@ Some critical operations that affect to speed of LZMA decompression:
   3) 32-bit shift and arithmetic operations
 
 Speed of LZMA decompressing mostly depends from CPU speed.
-Memory speed has no big meaning. But if your CPU has small data cache, 
+Memory speed has no big meaning. But if your CPU has small data cache,
 overall weight of memory speed will slightly increase.
 
 
@@ -224,53 +224,53 @@ Usage:  LZMA <e|d> inputFile outputFile [<switches>...]
 
   d: decode file
 
-  b: Benchmark. There are two tests: compressing and decompressing 
-     with LZMA method. Benchmark shows rating in MIPS (million 
-     instructions per second). Rating value is calculated from 
+  b: Benchmark. There are two tests: compressing and decompressing
+     with LZMA method. Benchmark shows rating in MIPS (million
+     instructions per second). Rating value is calculated from
      measured speed and it is normalized with AMD Athlon 64 X2 CPU
-     results. Also Benchmark checks possible hardware errors (RAM 
+     results. Also Benchmark checks possible hardware errors (RAM
      errors in most cases). Benchmark uses these settings:
-     (-a1, -d21, -fb32, -mfbt4). You can change only -d. Also you 
+     (-a1, -d21, -fb32, -mfbt4). You can change only -d. Also you
      can change number of iterations. Example for 30 iterations:
-	LZMA b 30
+        LZMA b 30
      Default number of iterations is 10.
 
 <Switches>
-  
+
 
   -a{N}:  set compression mode 0 = fast, 1 = normal
           default: 1 (normal)
 
   d{N}:   Sets Dictionary size - [0, 30], default: 23 (8MB)
           The maximum value for dictionary size is 1 GB = 2^30 bytes.
-          Dictionary size is calculated as DictionarySize = 2^N bytes. 
-          For decompressing file compressed by LZMA method with dictionary 
+          Dictionary size is calculated as DictionarySize = 2^N bytes.
+          For decompressing file compressed by LZMA method with dictionary
           size D = 2^N you need about D bytes of memory (RAM).
 
   -fb{N}: set number of fast bytes - [5, 273], default: 128
-          Usually big number gives a little bit better compression ratio 
+          Usually big number gives a little bit better compression ratio
           and slower compression process.
 
   -lc{N}: set number of literal context bits - [0, 8], default: 3
           Sometimes lc=4 gives gain for big files.
 
   -lp{N}: set number of literal pos bits - [0, 4], default: 0
-          lp switch is intended for periodical data when period is 
-          equal 2^N. For example, for 32-bit (4 bytes) 
-          periodical data you can use lp=2. Often it's better to set lc0, 
+          lp switch is intended for periodical data when period is
+          equal 2^N. For example, for 32-bit (4 bytes)
+          periodical data you can use lp=2. Often it's better to set lc0,
           if you change lp switch.
 
   -pb{N}: set number of pos bits - [0, 4], default: 2
-          pb switch is intended for periodical data 
+          pb switch is intended for periodical data
           when period is equal 2^N.
 
-  -mf{MF_ID}: set Match Finder. Default: bt4. 
-              Algorithms from hc* group doesn't provide good compression 
-              ratio, but they often works pretty fast in combination with 
+  -mf{MF_ID}: set Match Finder. Default: bt4.
+              Algorithms from hc* group doesn't provide good compression
+              ratio, but they often works pretty fast in combination with
               fast mode (-a0).
 
-              Memory requirements depend from dictionary size 
-              (parameter "d" in table below). 
+              Memory requirements depend from dictionary size
+              (parameter "d" in table below).
 
                MF_ID     Memory                   Description
 
@@ -279,8 +279,8 @@ Usage:  LZMA <e|d> inputFile outputFile [<switches>...]
                 bt4    d * 11.5 + 4MB  Binary Tree with 4 bytes hashing.
                 hc4    d *  7.5 + 4MB  Hash Chain with 4 bytes hashing.
 
-  -eos:   write End Of Stream marker. By default LZMA doesn't write 
-          eos marker, since LZMA decoder knows uncompressed size 
+  -eos:   write End Of Stream marker. By default LZMA doesn't write
+          eos marker, since LZMA decoder knows uncompressed size
           stored in .lzma file header.
 
   -si:    Read data from stdin (it will write End Of Stream marker).
@@ -289,16 +289,16 @@ Usage:  LZMA <e|d> inputFile outputFile [<switches>...]
 
 Examples:
 
-1) LZMA e file.bin file.lzma -d16 -lc0 
+1) LZMA e file.bin file.lzma -d16 -lc0
 
-compresses file.bin to file.lzma with 64 KB dictionary (2^16=64K)  
-and 0 literal context bits. -lc0 allows to reduce memory requirements 
+compresses file.bin to file.lzma with 64 KB dictionary (2^16=64K)
+and 0 literal context bits. -lc0 allows to reduce memory requirements
 for decompression.
 
 
 2) LZMA e file.bin file.lzma -lc0 -lp2
 
-compresses file.bin to file.lzma with settings suitable 
+compresses file.bin to file.lzma with settings suitable
 for 32-bit periodical data (for example, ARM or MIPS code).
 
 3) LZMA d file.lzma file.bin
@@ -312,9 +312,9 @@ Compression ratio hints
 Recommendations
 ---------------
 
-To increase compression ratio for LZMA compressing it's desirable 
+To increase compression ratio for LZMA compressing it's desirable
 to have aligned data (if it's possible) and also it's desirable to locate
-data in such order, where code is grouped in one place and data is 
+data in such order, where code is grouped in one place and data is
 grouped in other place (it's better than such mixing: code, data, code,
 data, ...).
 
@@ -322,19 +322,19 @@ data, ...).
 Using Filters
 -------------
 You can increase compression ratio for some data types, using
-special filters before compressing. For example, it's possible to 
-increase compression ratio on 5-10% for code for those CPU ISAs: 
+special filters before compressing. For example, it's possible to
+increase compression ratio on 5-10% for code for those CPU ISAs:
 x86, IA-64, ARM, ARM-Thumb, PowerPC, SPARC.
 
 You can find C/C++ source code of such filters in folder "7zip/Compress/Branch"
 
-You can check compression ratio gain of these filters with such 
+You can check compression ratio gain of these filters with such
 7-Zip commands (example for ARM code):
 No filter:
   7z a a1.7z a.bin -m0=lzma
 
 With filter for little-endian ARM code:
-  7z a a2.7z a.bin -m0=bc_arm -m1=lzma        
+  7z a a2.7z a.bin -m0=bc_arm -m1=lzma
 
 With filter for big-endian ARM code (using additional Swap4 filter):
   7z a a3.7z a.bin -m0=swap4 -m1=bc_arm -m2=lzma
@@ -345,11 +345,11 @@ Decompressing  = LZMA_decoding + Filter_decoding
 
 Compressing and decompressing speed of such filters is very high,
 so it will not increase decompressing time too much.
-Moreover, it reduces decompression time for LZMA_decoding, 
+Moreover, it reduces decompression time for LZMA_decoding,
 since compression ratio with filtering is higher.
 
-These filters convert CALL (calling procedure) instructions 
-from relative offsets to absolute addresses, so such data becomes more 
+These filters convert CALL (calling procedure) instructions
+from relative offsets to absolute addresses, so such data becomes more
 compressible. Source code of these CALL filters is pretty simple
 (about 20 lines of C++), so you can convert it from C++ version yourself.
 
@@ -377,10 +377,10 @@ To compile ANSI-C LZMA Decoder you can use one of the following files sets:
 Memory requirements for LZMA decoding
 -------------------------------------
 
-LZMA decoder doesn't allocate memory itself, so you must 
+LZMA decoder doesn't allocate memory itself, so you must
 allocate memory and send it to LZMA.
 
-Stack usage of LZMA decoding function for local variables is not 
+Stack usage of LZMA decoding function for local variables is not
 larger than 200 bytes.
 
 How To decompress data
@@ -417,8 +417,8 @@ Decompressing steps
     return PrintError(rs, kCantAllocateMessage);
 
   LZMA decoder uses array of CProb variables as internal structure.
-  By default, CProb is unsigned_short. But you can define _LZMA_PROB32 to make 
-  it unsigned_int. It can increase speed on some 32-bit CPUs, but memory 
+  By default, CProb is unsigned_short. But you can define _LZMA_PROB32 to make
+  it unsigned_int. It can increase speed on some 32-bit CPUs, but memory
   usage will be doubled in that case.
 
 
@@ -434,10 +434,10 @@ Compile defines: no defines
 Memory Requirements:
   - Input buffer: compressed size
   - Output buffer: uncompressed size
-  - LZMA Internal Structures (~16 KB for default settings) 
+  - LZMA Internal Structures (~16 KB for default settings)
 
 Interface:
-  int res = LzmaDecode(&state, 
+  int res = LzmaDecode(&state,
       inStream, compressedSize, &inProcessed,
       outStream, outSize, &outProcessed);
 
@@ -450,7 +450,7 @@ Compile defines: _LZMA_IN_CB
 Memory Requirements:
   - Buffer for input stream: any size (for example, 16 KB)
   - Output buffer: uncompressed size
-  - LZMA Internal Structures (~16 KB for default settings) 
+  - LZMA Internal Structures (~16 KB for default settings)
 
 Interface:
   typedef struct _CBuffer
@@ -472,22 +472,22 @@ Interface:
 
   g_InBuffer.File = inFile;
   g_InBuffer.InCallback.Read = LzmaReadCompressed;
-  int res = LzmaDecode(&state, 
+  int res = LzmaDecode(&state,
       &g_InBuffer.InCallback,
       outStream, outSize, &outProcessed);
 
 
 5.3 Multi-call decompressing with output buffer
 -----------------------------------------------
-When to use: RAM->File decompressing 
+When to use: RAM->File decompressing
 Compile files: LzmaDecode.h, LzmaDecode.c
 Compile defines: _LZMA_OUT_READ
 Memory Requirements:
  - Input buffer: compressed size
  - Buffer for output stream: any size (for example, 16 KB)
- - LZMA Internal Structures (~16 KB for default settings) 
+ - LZMA Internal Structures (~16 KB for default settings)
  - LZMA dictionary (dictionary size is encoded in stream properties)
- 
+
 Interface:
 
   state.Dictionary = (unsigned char *)malloc(state.Properties.DictionarySize);
@@ -508,19 +508,19 @@ Interface:
 
 5.4 Multi-call decompressing with input callback and output buffer
 ------------------------------------------------------------------
-When to use: File->File decompressing 
+When to use: File->File decompressing
 Compile files: LzmaDecode.h, LzmaDecode.c
 Compile defines: _LZMA_IN_CB, _LZMA_OUT_READ
 Memory Requirements:
  - Buffer for input stream: any size (for example, 16 KB)
  - Buffer for output stream: any size (for example, 16 KB)
- - LZMA Internal Structures (~16 KB for default settings) 
+ - LZMA Internal Structures (~16 KB for default settings)
  - LZMA dictionary (dictionary size is encoded in stream properties)
- 
+
 Interface:
 
   state.Dictionary = (unsigned char *)malloc(state.Properties.DictionarySize);
- 
+
   LzmaDecoderInit(&state);
   do
   {
@@ -535,20 +535,20 @@ Interface:
 
 5.5 Multi-call State Decompressing (zlib-like interface)
 ------------------------------------------------------------------
-When to use: file->file decompressing 
+When to use: file->file decompressing
 Compile files: LzmaStateDecode.h, LzmaStateDecode.c
 Compile defines:
 Memory Requirements:
  - Buffer for input stream: any size (for example, 16 KB)
  - Buffer for output stream: any size (for example, 16 KB)
- - LZMA Internal Structures (~16 KB for default settings) 
+ - LZMA Internal Structures (~16 KB for default settings)
  - LZMA dictionary (dictionary size is encoded in stream properties)
- 
+
 Interface:
 
   state.Dictionary = (unsigned char *)malloc(state.Properties.DictionarySize);
 
-  
+
   LzmaDecoderInit(&state);
   do
   {
@@ -570,8 +570,8 @@ Interface:
 Note
 ----
 LzmaDecodeSize.c is size-optimized version of LzmaDecode.c.
-But compiled code of LzmaDecodeSize.c can be larger than 
-compiled code of LzmaDecode.c. So it's better to use 
+But compiled code of LzmaDecodeSize.c can be larger than
+compiled code of LzmaDecode.c. So it's better to use
 LzmaDecode.c in most cases.
 
 
@@ -583,7 +583,7 @@ LZMA decoder can return one of the following codes:
 #define LZMA_RESULT_OK 0
 #define LZMA_RESULT_DATA_ERROR 1
 
-If you use callback function for input data and you return some 
+If you use callback function for input data and you return some
 error code, LZMA Decoder also returns that code.
 
 
@@ -600,7 +600,7 @@ _LZMA_LOC_OPT  - Enable local speed optimizations inside code.
                  _LZMA_LOC_OPT doesn't affect LzmaDecode.c (speed-optimized version)
                  and LzmaStateDecode.c
 
-_LZMA_PROB32   - It can increase speed on some 32-bit CPUs, 
+_LZMA_PROB32   - It can increase speed on some 32-bit CPUs,
                  but memory usage will be doubled in that case
 
 _LZMA_UINT32_IS_ULONG  - Define it if int is 16-bit on your compiler
@@ -611,9 +611,9 @@ _LZMA_SYSTEM_SIZE_T  - Define it if you want to use system's size_t.
 
 
 
-C++ LZMA Encoder/Decoder 
+C++ LZMA Encoder/Decoder
 ~~~~~~~~~~~~~~~~~~~~~~~~
-C++ LZMA code use COM-like interfaces. So if you want to use it, 
+C++ LZMA code use COM-like interfaces. So if you want to use it,
 you can study basics of COM/OLE.
 
 By default, LZMA Encoder contains all Match Finders.

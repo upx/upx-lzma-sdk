@@ -13,8 +13,8 @@
 #define LZMA_SIZE_OFFSET 6
 
 int LzmaRamGetUncompressedSize(
-    const unsigned char *inBuffer, 
-    size_t inSize, 
+    const unsigned char *inBuffer,
+    size_t inSize,
     size_t *outSize)
 {
   unsigned int i;
@@ -33,12 +33,12 @@ int LzmaRamGetUncompressedSize(
 #define SZE_OUTOFMEMORY (2)
 
 int LzmaRamDecompress(
-    const unsigned char *inBuffer, 
+    const unsigned char *inBuffer,
     size_t inSize,
     unsigned char *outBuffer,
     size_t outSize,
     size_t *outSizeProcessed,
-    void * (*allocFunc)(size_t size), 
+    void * (*allocFunc)(size_t size),
     void (*freeFunc)(void *))
 {
   CLzmaDecoderState state;  /* it's about 24 bytes structure, if int is 32-bit */
@@ -46,7 +46,7 @@ int LzmaRamDecompress(
   SizeT outSizeProcessedLoc;
   SizeT inProcessed;
   int useFilter;
-  
+
   if (inSize < LZMA_PROPS_SIZE)
     return 1;
   useFilter = inBuffer[0];
@@ -60,7 +60,7 @@ int LzmaRamDecompress(
   state.Probs = (CProb *)allocFunc(LzmaGetNumProbs(&state.Properties) * sizeof(CProb));
   if (state.Probs == 0)
     return SZE_OUTOFMEMORY;
-  
+
   result = LzmaDecode(&state,
     inBuffer + LZMA_PROPS_SIZE, (SizeT)inSize - LZMA_PROPS_SIZE, &inProcessed,
     outBuffer, (SizeT)outSize, &outSizeProcessedLoc);

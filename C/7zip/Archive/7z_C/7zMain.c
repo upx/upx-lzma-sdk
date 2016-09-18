@@ -1,4 +1,4 @@
-/* 
+/*
 7zMain.c
 Test application for 7z Decoder
 LZMA SDK 4.43 Copyright (c) 1999-2006 Igor Pavlov (2006-06-04)
@@ -150,7 +150,7 @@ int main(int numargs, char *args[])
         if (f->IsDirectory)
           printf("Directory ");
         else
-          printf(testCommand ? 
+          printf(testCommand ?
             "Testing   ":
             "Extracting");
         printf(" %s", f->Name);
@@ -159,9 +159,9 @@ int main(int numargs, char *args[])
           printf("\n");
           continue;
         }
-        res = SzExtract(&archiveStream.InStream, &db, i, 
-            &blockIndex, &outBuffer, &outBufferSize, 
-            &offset, &outSizeProcessed, 
+        res = SzExtract(&archiveStream.InStream, &db, i,
+            &blockIndex, &outBuffer, &outBufferSize,
+            &offset, &outSizeProcessed,
             &allocImp, &allocTempImp);
         if (res != SZ_OK)
           break;
@@ -177,7 +177,7 @@ int main(int numargs, char *args[])
               fileName = f->Name + nameLen;
               break;
             }
-            
+
           outputHandle = fopen(fileName, "wb+");
           if (outputHandle == 0)
           {
@@ -219,7 +219,7 @@ int main(int numargs, char *args[])
   }
   if (res == SZE_OUTOFMEMORY)
     PrintError("can not allocate memory");
-  else     
+  else
     printf("\nERROR #%d\n", res);
   return 1;
 }
