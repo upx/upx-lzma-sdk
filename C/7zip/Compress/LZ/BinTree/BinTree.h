@@ -19,7 +19,9 @@ class CMatchFinder:
   UInt32 _matchMaxLen;
   CIndex *_hash;
   CIndex *_son;
+#if !defined(BT_NO_HASH_MASK)
   UInt32 _hashMask;
+#endif
   UInt32 _cutValue;
   UInt32 _hashSizeSum;
 

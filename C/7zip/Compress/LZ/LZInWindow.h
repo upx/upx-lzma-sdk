@@ -63,7 +63,7 @@ public:
     distance++;
     const Byte *pby = _buffer + (size_t)_pos + index;
     UInt32 i;
-    for(i = 0; i < limit && pby[i] == pby[(size_t)i - distance]; i++);
+    for(i = 0; i < limit && pby[i] == pby[(size_t)i - distance]; i++) { }
     return i;
   }
 
@@ -79,7 +79,7 @@ public:
 
   bool NeedMove(UInt32 numCheckBytes)
   {
-    UInt32 reserv = _pointerToLastSafePosition - (_buffer + _pos);
+    size_t reserv = _pointerToLastSafePosition - (_buffer + _pos);
     return (reserv <= numCheckBytes);
   }
 };

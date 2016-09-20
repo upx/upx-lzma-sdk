@@ -645,7 +645,7 @@ HRESULT CEncoder::GetOptimum(UInt32 position, UInt32 &backRes, UInt32 &lenRes)
     }
     UInt32 lenTest;
     for (lenTest = 2; lenTest < numAvailableBytes &&
-        data[lenTest] == data[(size_t)lenTest - backOffset]; lenTest++);
+        data[lenTest] == data[(size_t)lenTest - backOffset]; lenTest++) { }
     repLens[i] = lenTest;
     if (lenTest > repLens[repMaxIndex])
       repMaxIndex = i;
@@ -904,7 +904,7 @@ HRESULT CEncoder::GetOptimum(UInt32 position, UInt32 &backRes, UInt32 &lenRes)
       UInt32 limit = MyMin(numAvailableBytesFull, _numFastBytes + 1);
       UInt32 temp;
       for (temp = 1; temp < limit &&
-          data[temp] == data[(size_t)temp - backOffset]; temp++);
+          data[temp] == data[(size_t)temp - backOffset]; temp++) { }
       UInt32 lenTest2 = temp - 1;
       if (lenTest2 >= 2)
       {
@@ -944,7 +944,7 @@ HRESULT CEncoder::GetOptimum(UInt32 position, UInt32 &backRes, UInt32 &lenRes)
         continue;
       UInt32 lenTest;
       for (lenTest = 2; lenTest < numAvailableBytes &&
-          data[lenTest] == data[(size_t)lenTest - backOffset]; lenTest++);
+          data[lenTest] == data[(size_t)lenTest - backOffset]; lenTest++) { }
       while(lenEnd < cur + lenTest)
         _optimum[++lenEnd].Price = kIfinityPrice;
       UInt32 lenTestTemp = lenTest;
@@ -972,7 +972,7 @@ HRESULT CEncoder::GetOptimum(UInt32 position, UInt32 &backRes, UInt32 &lenRes)
           UInt32 lenTest2 = lenTest + 1;
           UInt32 limit = MyMin(numAvailableBytesFull, lenTest2 + _numFastBytes);
           for (; lenTest2 < limit &&
-              data[lenTest2] == data[(size_t)lenTest2 - backOffset]; lenTest2++);
+              data[lenTest2] == data[(size_t)lenTest2 - backOffset]; lenTest2++) { }
           lenTest2 -= lenTest + 1;
           if (lenTest2 >= 2)
           {
@@ -1017,7 +1017,7 @@ HRESULT CEncoder::GetOptimum(UInt32 position, UInt32 &backRes, UInt32 &lenRes)
     if (newLen > numAvailableBytes)
     {
       newLen = numAvailableBytes;
-      for (numDistancePairs = 0; newLen > matchDistances[numDistancePairs]; numDistancePairs += 2);
+      for (numDistancePairs = 0; newLen > matchDistances[numDistancePairs]; numDistancePairs += 2) { }
       matchDistances[numDistancePairs] = newLen;
       numDistancePairs += 2;
     }
@@ -1059,7 +1059,7 @@ HRESULT CEncoder::GetOptimum(UInt32 position, UInt32 &backRes, UInt32 &lenRes)
           UInt32 lenTest2 = lenTest + 1;
           UInt32 limit = MyMin(numAvailableBytesFull, lenTest2 + _numFastBytes);
           for (; lenTest2 < limit &&
-              data[lenTest2] == data[(size_t)lenTest2 - backOffset]; lenTest2++);
+              data[lenTest2] == data[(size_t)lenTest2 - backOffset]; lenTest2++) { }
           lenTest2 -= lenTest + 1;
           if (lenTest2 >= 2)
           {
@@ -1129,7 +1129,7 @@ HRESULT CEncoder::ReadMatchDistances(UInt32 &lenRes, UInt32 &numDistancePairs)
   return S_OK;
 }
 
-HRESULT CEncoder::GetOptimumFast(UInt32 position, UInt32 &backRes, UInt32 &lenRes)
+HRESULT CEncoder::GetOptimumFast(UInt32 /*position*/, UInt32 &backRes, UInt32 &lenRes)
 {
   UInt32 lenMain, numDistancePairs;
   if (!_longestMatchWasFound)
@@ -1166,7 +1166,7 @@ HRESULT CEncoder::GetOptimumFast(UInt32 position, UInt32 &backRes, UInt32 &lenRe
       continue;
     }
     UInt32 len;
-    for (len = 2; len < numAvailableBytes && data[len] == data[(size_t)len - backOffset]; len++);
+    for (len = 2; len < numAvailableBytes && data[len] == data[(size_t)len - backOffset]; len++) { }
     if(len >= _numFastBytes)
     {
       backRes = i;
@@ -1204,8 +1204,8 @@ HRESULT CEncoder::GetOptimumFast(UInt32 position, UInt32 &backRes, UInt32 &lenRe
   if (repLens[repMaxIndex] >= 2)
   {
     if (repLens[repMaxIndex] + 1 >= lenMain ||
-        repLens[repMaxIndex] + 2 >= lenMain && (backMain > (1 << 9)) ||
-        repLens[repMaxIndex] + 3 >= lenMain && (backMain > (1 << 15)))
+        (repLens[repMaxIndex] + 2 >= lenMain && (backMain > (1 << 9))) ||
+        (repLens[repMaxIndex] + 3 >= lenMain && (backMain > (1 << 15))))
     {
       backRes = repMaxIndex;
       lenRes = repLens[repMaxIndex];
@@ -1219,10 +1219,10 @@ HRESULT CEncoder::GetOptimumFast(UInt32 position, UInt32 &backRes, UInt32 &lenRe
     if (_longestMatchLength >= 2)
     {
       UInt32 newDistance = matchDistances[_numDistancePairs - 1];
-      if (_longestMatchLength >= lenMain && newDistance < backMain ||
-          _longestMatchLength == lenMain + 1 && !ChangePair(backMain, newDistance) ||
+      if ((_longestMatchLength >= lenMain && newDistance < backMain) ||
+          (_longestMatchLength == lenMain + 1 && !ChangePair(backMain, newDistance)) ||
           _longestMatchLength > lenMain + 1 ||
-          _longestMatchLength + 1 >= lenMain && lenMain >= 3 && ChangePair(newDistance, backMain))
+          (_longestMatchLength + 1 >= lenMain && lenMain >= 3 && ChangePair(newDistance, backMain)))
       {
         _longestMatchWasFound = true;
         backRes = UInt32(-1);
@@ -1241,7 +1241,7 @@ HRESULT CEncoder::GetOptimumFast(UInt32 position, UInt32 &backRes, UInt32 &lenRe
         continue;
       }
       UInt32 len;
-      for (len = 2; len < numAvailableBytes && data[len] == data[(size_t)len - backOffset]; len++);
+      for (len = 2; len < numAvailableBytes && data[len] == data[(size_t)len - backOffset]; len++) { }
       if (len + 1 >= lenMain)
       {
         _longestMatchWasFound = true;
@@ -1313,7 +1313,7 @@ HRESULT CEncoder::CodeReal(ISequentialInStream *inStream,
 
 HRESULT CEncoder::SetStreams(ISequentialInStream *inStream,
       ISequentialOutStream *outStream,
-      const UInt64 *inSize, const UInt64 *outSize)
+      const UInt64 * /*inSize*/, const UInt64 * /*outSize*/)
 {
   _inStream = inStream;
   _finished = false;

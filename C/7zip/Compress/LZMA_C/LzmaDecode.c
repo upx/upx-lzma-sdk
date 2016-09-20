@@ -63,7 +63,7 @@
 
 #define RangeDecoderBitTreeDecode(probs, numLevels, res) \
   { int i = numLevels; res = 1; \
-  do { CProb *p = probs + res; RC_GET_BIT(p, res) } while(--i != 0); \
+  do { CProb *pp = probs + res; RC_GET_BIT(pp, res) } while(--i != 0); \
   res -= (1 << numLevels); }
 
 
@@ -126,8 +126,8 @@ int LzmaDecodeProperties(CLzmaProperties *propsRes, const unsigned char *propsDa
   if (prop0 >= (9 * 5 * 5))
     return LZMA_RESULT_DATA_ERROR;
   {
-    for (propsRes->pb = 0; prop0 >= (9 * 5); propsRes->pb++, prop0 -= (9 * 5));
-    for (propsRes->lp = 0; prop0 >= 9; propsRes->lp++, prop0 -= 9);
+    for (propsRes->pb = 0; prop0 >= (9 * 5); propsRes->pb++, prop0 -= (9 * 5)) { }
+    for (propsRes->lp = 0; prop0 >= 9; propsRes->lp++, prop0 -= 9) { }
     propsRes->lc = prop0;
     /*
     unsigned char remainder = (unsigned char)(prop0 / 9);
