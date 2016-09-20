@@ -101,6 +101,7 @@ typedef LONG SCODE;
 
 struct IUnknown
 {
+  virtual ~IUnknown() { }
   STDMETHOD(QueryInterface) (REFIID iid, void **outObject) PURE;
   STDMETHOD_(ULONG, AddRef)() PURE;
   STDMETHOD_(ULONG, Release)() PURE;

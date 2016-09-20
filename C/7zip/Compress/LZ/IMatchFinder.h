@@ -18,6 +18,7 @@ struct IInWindowStream: public IUnknown
 
 struct IMatchFinder: public IInWindowStream
 {
+  virtual ~IMatchFinder() { }
   STDMETHOD(Create)(UInt32 historySize, UInt32 keepAddBufferBefore,
       UInt32 matchMaxLen, UInt32 keepAddBufferAfter) PURE;
   STDMETHOD(GetMatches)(UInt32 *distances) PURE;
@@ -26,6 +27,7 @@ struct IMatchFinder: public IInWindowStream
 
 struct IMatchFinderSetNumPasses
 {
+  virtual ~IMatchFinderSetNumPasses() { }
   virtual void SetNumPasses(UInt32 numPasses) PURE;
 };
 
