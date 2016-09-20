@@ -154,7 +154,7 @@ UInt32 CLiteralEncoder2::GetPrice(bool matchMode, Byte matchByte, Byte symbol) c
     context = (context << 1) | bit;
   }
   return price;
-};
+}
 
 
 namespace NLength {
@@ -486,7 +486,7 @@ STDMETHODIMP CEncoder::WriteCoderProperties(ISequentialOutStream *outStream)
 {
   const UInt32 kPropSize = 5;
   Byte properties[kPropSize];
-  properties[0] = (_posStateBits * 5 + _numLiteralPosStateBits) * 9 + _numLiteralContextBits;
+  properties[0] = Byte((_posStateBits * 5 + _numLiteralPosStateBits) * 9 + _numLiteralContextBits);
   for (int i = 0; i < 4; i++)
     properties[1 + i] = Byte(_dictionarySize >> (8 * i));
   return WriteStream(outStream, properties, kPropSize, NULL);
