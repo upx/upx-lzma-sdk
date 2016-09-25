@@ -516,8 +516,10 @@ int LzmaDecode(CLzmaDecoderState *vs,
           rep0 = posSlot;
         if (++rep0 == (UInt32)(0))
         {
+#if defined(_LZMA_OUT_READ) || (defined(UPX_LZMA_COMPAT) && (UPX_LZMA_COMPAT+0))
           /* it's for stream version */
           len = kLzmaStreamWasFinishedId;
+#endif
           break;
         }
       }
