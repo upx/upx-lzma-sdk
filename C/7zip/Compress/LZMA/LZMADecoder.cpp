@@ -309,7 +309,8 @@ STDMETHODIMP CDecoder::ReleaseInStream()
 
 STDMETHODIMP CDecoder::SetOutStreamSize(const UInt64 *outSize)
 {
-  if (_outSizeDefined = (outSize != NULL))
+  _outSizeDefined = (outSize != NULL);
+  if (_outSizeDefined)
     _outSize = *outSize;
   _remainLen = kLenIdNeedInit;
   _outWindowStream.Init();
