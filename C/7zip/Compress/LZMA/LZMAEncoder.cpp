@@ -968,7 +968,7 @@ HRESULT CEncoder::GetOptimum(UInt32 position, UInt32 &backRes, UInt32 &lenRes)
         startLen = lenTest + 1;
 
       // if (_maxMode)
-        {
+      {
           UInt32 lenTest2 = lenTest + 1;
           UInt32 limit = MyMin(numAvailableBytesFull, lenTest2 + _numFastBytes);
           for (; lenTest2 < limit &&
@@ -1010,8 +1010,8 @@ HRESULT CEncoder::GetOptimum(UInt32 position, UInt32 &backRes, UInt32 &lenRes)
               }
             }
           }
-        }
       }
+    }
 
     //    for(UInt32 lenTest = 2; lenTest <= newLen; lenTest++)
     if (newLen > numAvailableBytes)
