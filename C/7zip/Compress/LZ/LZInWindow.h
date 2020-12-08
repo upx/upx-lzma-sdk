@@ -24,7 +24,7 @@ protected:
   HRESULT ReadBlock();
   void Free();
 public:
-  CLZInWindow(): _bufferBase(0) {}
+  CLZInWindow(): _bufferBase(NULL) {}
   virtual ~CLZInWindow() { Free(); }
 
   // keepSizeBefore + keepSizeAfter + keepSizeReserv < 4G)

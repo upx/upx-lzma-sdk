@@ -56,14 +56,14 @@ static const UInt32 kFixHashSize = 0
     ;
 
 CMatchFinder::CMatchFinder():
-  _hash(0)
+  _hash(NULL)
 {
 }
 
 void CMatchFinder::FreeThisClassMemory()
 {
   BigFree(_hash);
-  _hash = 0;
+  _hash = NULL;
 }
 
 void CMatchFinder::FreeMemory()
@@ -98,7 +98,7 @@ STDMETHODIMP CMatchFinder::Create(UInt32 historySize, UInt32 keepAddBufferBefore
   {
     _matchMaxLen = matchMaxLen;
     UInt32 newCyclicBufferSize = historySize + 1;
-    if (_hash != 0 && newCyclicBufferSize == _cyclicBufferSize)
+    if (_hash != NULL && newCyclicBufferSize == _cyclicBufferSize)
       return S_OK;
     FreeThisClassMemory();
     _cyclicBufferSize = newCyclicBufferSize; // don't change it
@@ -135,7 +135,7 @@ STDMETHODIMP CMatchFinder::Create(UInt32 historySize, UInt32 keepAddBufferBefore
       return E_OUTOFMEMORY;
     _hash = (CIndex *)BigAlloc(sizeInBytes);
     _son = _hash + _hashSizeSum;
-    if (_hash != 0)
+    if (_hash != NULL)
       return S_OK;
   }
   FreeMemory();

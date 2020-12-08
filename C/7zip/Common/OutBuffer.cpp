@@ -11,18 +11,18 @@ bool COutBuffer::Create(UInt32 bufferSize)
   const UInt32 kMinBlockSize = 1;
   if (bufferSize < kMinBlockSize)
     bufferSize = kMinBlockSize;
-  if (_buffer != 0 && _bufferSize == bufferSize)
+  if (_buffer != NULL && _bufferSize == bufferSize)
     return true;
   Free();
   _bufferSize = bufferSize;
   _buffer = (Byte *)::MidAlloc(bufferSize);
-  return (_buffer != 0);
+  return (_buffer != NULL);
 }
 
 void COutBuffer::Free()
 {
   ::MidFree(_buffer);
-  _buffer = 0;
+  _buffer = NULL;
 }
 
 void COutBuffer::SetStream(ISequentialOutStream *stream)
@@ -59,13 +59,13 @@ HRESULT COutBuffer::FlushPart()
   #ifdef _NO_EXCEPTIONS
   result = ErrorCode;
   #endif
-  if (_buffer2 != 0)
+  if (_buffer2 != NULL)
   {
     memmove(_buffer2, _buffer + _streamPos, size);
     _buffer2 += size;
   }
 
-  if (_stream != 0
+  if (_stream != NULL
       #ifdef _NO_EXCEPTIONS
       && (ErrorCode == S_OK)
       #endif

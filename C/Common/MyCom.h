@@ -28,7 +28,7 @@ public:
   T* operator->() const { return _p; }
   T* operator=(T* p)
   {
-    if (p != 0)
+    if (p != NULL)
       p->AddRef();
     if (_p)
       _p->Release();

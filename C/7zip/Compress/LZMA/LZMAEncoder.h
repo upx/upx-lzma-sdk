@@ -96,16 +96,16 @@ class CLiteralEncoder
   int _numPosBits;
   UInt32 _posMask;
 public:
-  CLiteralEncoder(): _coders(0) {}
+  CLiteralEncoder(): _coders(NULL) {}
   ~CLiteralEncoder()  { Free(); }
   void Free()
   {
     MyFree(_coders);
-    _coders = 0;
+    _coders = NULL;
   }
   bool Create(int numPosBits, int numPrevBits)
   {
-    if (_coders == 0 || (numPosBits + numPrevBits) != (_numPrevBits + _numPosBits))
+    if (_coders == NULL || (numPosBits + numPrevBits) != (_numPrevBits + _numPosBits))
     {
       Free();
       UInt32 numStates = 1 << (numPosBits + numPrevBits);
@@ -114,7 +114,7 @@ public:
     _numPosBits = numPosBits;
     _posMask = (1 << numPosBits) - 1;
     _numPrevBits = numPrevBits;
-    return (_coders != 0);
+    return (_coders != NULL);
   }
   void Init()
   {
@@ -254,7 +254,7 @@ class CEncoder :
 
   void ReleaseMatchFinder()
   {
-    setMfPasses = 0;
+    setMfPasses = NULL;
     _matchFinder.Release();
   }
 

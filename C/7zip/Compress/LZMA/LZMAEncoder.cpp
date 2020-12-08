@@ -234,7 +234,7 @@ CEncoder::CEncoder():
   _multiThread(false),
    #endif
   _writeEndMark(false),
-  setMfPasses(0)
+  setMfPasses(NULL)
 {
   // _maxMode = false;
   _fastMode = false;
@@ -288,7 +288,7 @@ HRESULT CEncoder::Create()
       }
       #endif
     }
-    if (_matchFinder == 0)
+    if (_matchFinder == NULL)
       return E_OUTOFMEMORY;
 
     #ifdef COMPRESS_MF_MT
@@ -311,7 +311,7 @@ HRESULT CEncoder::Create()
   if (_dictionarySize == _dictionarySizePrev && _numFastBytesPrev == _numFastBytes)
     return S_OK;
   RINOK(_matchFinder->Create(_dictionarySize, kNumOpts, _numFastBytes, kMatchMaxLen + 1)); // actually it's + _numFastBytes - _numFastBytes
-  if (_matchFinderCycles != 0 && setMfPasses != 0)
+  if (_matchFinderCycles != 0 && setMfPasses != NULL)
     setMfPasses->SetNumPasses(_matchFinderCycles);
   _dictionarySizePrev = _dictionarySize;
   _numFastBytesPrev = _numFastBytes;
@@ -1304,7 +1304,7 @@ HRESULT CEncoder::CodeReal(ISequentialInStream *inStream,
     RINOK(CodeOneBlock(&processedInSize, &processedOutSize, &finished));
     if (finished != 0)
       return S_OK;
-    if (progress != 0)
+    if (progress != NULL)
     {
       RINOK(progress->SetRatioInfo(&processedInSize, &processedOutSize));
     }
@@ -1345,12 +1345,12 @@ HRESULT CEncoder::SetStreams(ISequentialInStream *inStream,
 
 HRESULT CEncoder::CodeOneBlock(UInt64 *inSize, UInt64 *outSize, Int32 *finished)
 {
-  if (_inStream != 0)
+  if (_inStream != NULL)
   {
     RINOK(_matchFinder->SetStream(_inStream));
     RINOK(_matchFinder->Init());
     _needReleaseMFStream = true;
-    _inStream = 0;
+    _inStream = NULL;
   }
 
 

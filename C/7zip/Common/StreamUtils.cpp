@@ -7,13 +7,13 @@
 
 HRESULT ReadStream(ISequentialInStream *stream, void *data, UInt32 size, UInt32 *processedSize)
 {
-  if (processedSize != 0)
+  if (processedSize != NULL)
     *processedSize = 0;
   while(size != 0)
   {
     UInt32 processedSizeLoc;
     HRESULT res = stream->Read(data, size, &processedSizeLoc);
-    if (processedSize != 0)
+    if (processedSize != NULL)
       *processedSize += processedSizeLoc;
     data = (Byte *)((Byte *)data + processedSizeLoc);
     size -= processedSizeLoc;
@@ -26,13 +26,13 @@ HRESULT ReadStream(ISequentialInStream *stream, void *data, UInt32 size, UInt32 
 
 HRESULT WriteStream(ISequentialOutStream *stream, const void *data, UInt32 size, UInt32 *processedSize)
 {
-  if (processedSize != 0)
+  if (processedSize != NULL)
     *processedSize = 0;
   while(size != 0)
   {
     UInt32 processedSizeLoc;
     HRESULT res = stream->Write(data, size, &processedSizeLoc);
-    if (processedSize != 0)
+    if (processedSize != NULL)
       *processedSize += processedSizeLoc;
     data = (const void *)((const Byte *)data + processedSizeLoc);
     size -= processedSizeLoc;

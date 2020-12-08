@@ -34,7 +34,7 @@ public:
   HRESULT ErrorCode;
   #endif
 
-  COutBuffer(): _buffer(0), _pos(0), _stream(0), _buffer2(0) {}
+  COutBuffer(): _buffer(NULL), _pos(0), _stream(NULL), _buffer2(NULL) {}
   ~COutBuffer() { Free(); }
 
   bool Create(UInt32 bufferSize);

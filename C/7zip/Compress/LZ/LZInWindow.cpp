@@ -9,7 +9,7 @@
 void CLZInWindow::Free()
 {
   ::BigFree(_bufferBase);
-  _bufferBase = 0;
+  _bufferBase = NULL;
 }
 
 bool CLZInWindow::Create(UInt32 keepSizeBefore, UInt32 keepSizeAfter, UInt32 keepSizeReserv)
@@ -17,7 +17,7 @@ bool CLZInWindow::Create(UInt32 keepSizeBefore, UInt32 keepSizeAfter, UInt32 kee
   _keepSizeBefore = keepSizeBefore;
   _keepSizeAfter = keepSizeAfter;
   UInt32 blockSize = keepSizeBefore + keepSizeAfter + keepSizeReserv;
-  if (_bufferBase == 0 || _blockSize != blockSize)
+  if (_bufferBase == NULL || _blockSize != blockSize)
   {
     Free();
     _blockSize = blockSize;
@@ -27,7 +27,7 @@ bool CLZInWindow::Create(UInt32 keepSizeBefore, UInt32 keepSizeAfter, UInt32 kee
   _pointerToLastSafePosition = _bufferBase + _blockSize - keepSizeAfter;
   if (_blockSize == 0)
     return true;
-  return (_bufferBase != 0);
+  return (_bufferBase != NULL);
 }
 
 void CLZInWindow::SetStream(ISequentialInStream *stream)
