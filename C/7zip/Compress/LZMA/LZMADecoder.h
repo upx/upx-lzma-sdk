@@ -74,16 +74,16 @@ class CLiteralDecoder
   int _numPosBits;
   UInt32 _posMask;
 public:
-  CLiteralDecoder(): _coders(0) {}
+  CLiteralDecoder(): _coders(NULL) {}
   ~CLiteralDecoder()  { Free(); }
   void Free()
   {
     MyFree(_coders);
-    _coders = 0;
+    _coders = NULL;
   }
   bool Create(int numPosBits, int numPrevBits)
   {
-    if (_coders == 0 || (numPosBits + numPrevBits) !=
+    if (_coders == NULL || (numPosBits + numPrevBits) !=
         (_numPrevBits + _numPosBits) )
     {
       Free();
@@ -93,7 +93,7 @@ public:
     _numPosBits = numPosBits;
     _posMask = (1 << numPosBits) - 1;
     _numPrevBits = numPrevBits;
-    return (_coders != 0);
+    return (_coders != NULL);
   }
   void Init()
   {

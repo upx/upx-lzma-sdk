@@ -7,10 +7,10 @@
 #include "../../Common/Alloc.h"
 
 CInBuffer::CInBuffer():
-  _buffer(0),
-  _bufferLimit(0),
-  _bufferBase(0),
-  _stream(0),
+  _buffer(NULL),
+  _bufferLimit(NULL),
+  _bufferBase(NULL),
+  _stream(NULL),
   _bufferSize(0)
 {}
 
@@ -19,18 +19,18 @@ bool CInBuffer::Create(UInt32 bufferSize)
   const UInt32 kMinBlockSize = 1;
   if (bufferSize < kMinBlockSize)
     bufferSize = kMinBlockSize;
-  if (_bufferBase != 0 && _bufferSize == bufferSize)
+  if (_bufferBase != NULL && _bufferSize == bufferSize)
     return true;
   Free();
   _bufferSize = bufferSize;
   _bufferBase = (Byte *)::MidAlloc(bufferSize);
-  return (_bufferBase != 0);
+  return (_bufferBase != NULL);
 }
 
 void CInBuffer::Free()
 {
   ::MidFree(_bufferBase);
-  _bufferBase = 0;
+  _bufferBase = NULL;
 }
 
 void CInBuffer::SetStream(ISequentialInStream *stream)
